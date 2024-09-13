@@ -1,9 +1,6 @@
 from flask import Flask, request, jsonify
 from playwright.sync_api import sync_playwright
-import subprocess
 
-# Ensure Playwright installs required browsers and dependencies
-subprocess.run(["playwright", "install"])
 
 app = Flask(__name__)
 
