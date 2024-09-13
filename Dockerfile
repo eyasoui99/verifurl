@@ -29,7 +29,7 @@ COPY --chown=user ./requirements.txt requirements.txt
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 # Install Playwright browsers (required step for running Playwright)
-RUN playwright install --with-deps
+RUN playwright install
 
 # Expose port 5000 for Flask
 EXPOSE 5000
