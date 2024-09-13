@@ -35,4 +35,4 @@ RUN playwright install --with-deps
 EXPOSE 5000
 
 # Run the Flask app
-CMD ["python", "app.py"]
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:7860", "--timeout", "360"]
