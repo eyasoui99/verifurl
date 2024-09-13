@@ -5,7 +5,8 @@ app = Flask(__name__)
 
 def get_status_code(url):
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)  # headless=True to run without opening the browser window
+        browser = p.chromium.launch(headless=False,
+                                        args=["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"])  # headless=True to run without opening the browser window
         page = browser.new_page()
         try:
             response = page.goto(url)
