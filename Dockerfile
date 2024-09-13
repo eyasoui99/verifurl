@@ -1,5 +1,5 @@
 # Use an official Python runtime as a base image
-FROM python:3.12-slim
+FROM python:3.9
 
 # Set environment variables to ensure that Python outputs everything to the terminal
 ENV PYTHONUNBUFFERED=1
@@ -25,8 +25,8 @@ RUN apt-get update && apt-get install -y \
     fonts-liberation \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --chown=user ./requirements.txt requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 # Install Playwright browsers (required step for running Playwright)
 RUN playwright install --with-deps
