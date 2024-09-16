@@ -48,7 +48,9 @@ def get_status_code(url):
 
 @app.route('/get_status', methods=['GET'])
 def get_status():
+    start_time = time.time()
     url = request.args.get('url')
+    execution_timeget = time.time() - start_time
     if not url:
         return jsonify({"error": "Missing 'url' parameter"}), 400
 
@@ -62,7 +64,8 @@ def get_status():
         "url": url,
         "status_code": status_code,
         "execution_times": execution_times,
-        "execution_time_seconds": execution_time
+        "execution_time_seconds": execution_time,
+        "execution_time_get_url": execution_timeget
     })
 
 if __name__ == '__main__':
