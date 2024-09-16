@@ -53,13 +53,16 @@ def get_status():
         return jsonify({"error": "Missing 'url' parameter"}), 400
 
     # Get the status code and execution times for each operation
+    start_time = time.time()
     status_code, execution_times = get_status_code(url)
+    execution_time = time.time() - start_time
 
     # Return the result along with the execution times
     return jsonify({
         "url": url,
         "status_code": status_code,
-        "execution_times": execution_times
+        "execution_times": execution_times,
+        "execution_time_seconds": execution_time
     })
 
 if __name__ == '__main__':
