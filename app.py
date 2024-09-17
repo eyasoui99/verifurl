@@ -11,22 +11,20 @@ def get_status_code(url):
         # Measure time to launch the browser
         start_time = time.time()
         browser = p.chromium.launch(headless=False,
-                                        args=["--no-sandbox", 
-                                              "--disable-setuid-sandbox", 
-                                              "--disable-dev-shm-usage",
-                                              "--remote-debugging-port=9222",  # Enable remote debugging
-                                              "--window-position=-10000,-10000"  # Move the window offscreen (hidden)
+                                    args=["--no-sandbox", 
+                                          "--disable-setuid-sandbox", 
+                                          "--disable-dev-shm-usage",
+                                          "--remote-debugging-port=9222",  # Enable remote debugging
+                                          "--window-position=-10000,-10000"  # Move the window offscreen (hidden)
         ])
         execution_times['launch_browser'] = time.time() - start_time
 
-        # Measure time to create a new page
-        start_time = time.time()
-        page = browser.new_page()
-        execution_times['create_new_page'] = time.time() - start_time
-
-        # Measure time to navigate to the URL
+        # Navigate directly to the URL without creating a new page
         start_time = time.time()
         try:
+            # Directly open the page in the browser
+            context = browser.new_context()
+            page = context.new_page()
             response = page.goto(url)
             execution_times['navigate_to_url'] = time.time() - start_time
 
